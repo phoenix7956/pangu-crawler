@@ -4,6 +4,8 @@
 
 **MCP (Model Context Protocol) 网页抓取插件,给 Pangu Agent / Claude / Cursor / 任何 MCP client 用。**
 
+> **发布状态**:v0.4 已发布到 [`phoenix7956/pangu-crawler`](https://github.com/phoenix7956/pangu-crawler)(public,Apache 2.0)。未来计划迁移到 `Pangu-MCP` 组织。
+
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![MCP](https://img.shields.io/badge/MCP-stdio%2FJSON--RPC-blue)](https://modelcontextprotocol.io)
 [![Node.js](https://img.shields.io/badge/Node.js-20%2B-green)](https://nodejs.org)

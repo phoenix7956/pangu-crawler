@@ -4,7 +4,7 @@
  * 参数/返回 schema 见 docs/DEV.md §5.1
  */
 import { z } from 'zod';
-import { CrawlerClient, type WebFetchResult } from '../crawler_client';
+import { CrawlerClient, type WebFetchResult } from '../crawler_client.js';
 
 // 参数 schema（Zod）—— W1 阶段与文档 §5.1 完全一致
 export const WebFetchInputSchema = z.object({
@@ -19,7 +19,7 @@ export const WebFetchInputSchema = z.object({
   use_proxy: z.boolean().optional().describe('是否走代理，W1 stub 默认 false'),
   wait_for_selector: z.string().optional().describe('Playwright 模式下等待的 CSS 选择器'),
   extract_main: z.boolean().optional().default(true).describe('是否用 readability 提取主要内容'),
-  headers: z.record(z.string()).optional().describe('自定义 headers'),
+  headers: z.record(z.string(), z.string()).optional().describe('自定义 headers'),
 });
 
 export type WebFetchInput = z.infer<typeof WebFetchInputSchema>;

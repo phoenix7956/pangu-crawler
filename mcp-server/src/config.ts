@@ -76,6 +76,12 @@ export function loadConfig(): AppConfig {
     return v === 'true' || v === '1';
   };
 
+  // 跨平台: 自动检测 python 命令名 (Mac/Linux: python3, Windows: python)
+  // 优先级: PANGU_CRAWLER_PYTHON env > config.json > 自动检测
+  if (!process.env.PANGU_CRAWLER_PYTHON && (cfg.crawler.python_path === 'python3' || cfg.crawler.python_path === 'python')) {
+    cfg.crawler.python_path = process.platform === 'win32' ? 'python' : 'python3';
+  }
+
   cfg.crawler.default_timeout_ms = num(
     process.env.CRAWLER_DEFAULT_TIMEOUT_MS,
     cfg.crawler.default_timeout_ms

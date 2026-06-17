@@ -16,8 +16,8 @@
  */
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import type { CrawlerConfig, LoggingConfig } from './config';
-import { getLogger } from './logger';
+import type { CrawlerConfig, LoggingConfig } from './config.js';
+import { getLogger } from './logger.js';
 
 export interface WebFetchArgs {
   url: string;

@@ -1,0 +1,119 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  node-test:
+    name: Node.js Tests (mcp-server)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22]
+    defaults:
+      run:
+        working-directory: mcp-server
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build TypeScript
+        run: pnpm build
+
+      - name: Run vitest
+        run: pnpm test
+
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 20
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-node
+          path: mcp-server/coverage/
+
+  python-test:
+    name: Python Tests (crawler-core)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: [3.11, 3.12]
+    defaults:
+      run:
+        working-directory: crawler-core
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Install dependencies
+        run: uv sync --extra dev
+
+      - name: Run pytest (W1 mock)
+        run: uv run pytest
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install
+        working-directory: mcp-server
+        run: pnpm install --frozen-lockfile
+
+      - name: TypeScript check
+        working-directory: mcp-server
+        run: pnpm lint
+
+  docs-check:
+    name: Docs Consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify required files exist
+        run: |
+          test -f LICENSE
+          test -f README.md
+          test -f CONTRIBUTING.md
+          test -f docs/DEV.md
+          test -f docs/API.md
+          test -f docs/BASELINE.md
+          test -f docs/PANGU-INTEGRATION.md
+
+      - name: Verify LICENSE is Apache 2.0
+        run: grep -q "Apache License" LICENSE

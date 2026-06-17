@@ -14,14 +14,14 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { z } from 'zod';
 
-import { loadConfig, type AppConfig } from './config';
-import { getLogger } from './logger';
-import { CrawlerClient } from './crawler_client';
+import { loadConfig, type AppConfig } from './config.js';
+import { getLogger } from './logger.js';
+import { CrawlerClient } from './crawler_client.js';
 import {
   webFetchToolDefinition,
   webFetch,
   WebFetchInputSchema,
-} from './tools/web_fetch';
+} from './tools/web_fetch.js';
 
 export class PanguCrawlerServer {
   private config: AppConfig;
@@ -72,7 +72,7 @@ export class PanguCrawlerServer {
           const parsed = WebFetchInputSchema.safeParse(args);
           if (!parsed.success) {
             const issues = parsed.error.issues.map(
-              (i) => `${i.path.join('.')}: ${i.message}`
+              (i: z.ZodIssue) => `${i.path.join('.')}: ${i.message}`
             );
             return {
               content: [

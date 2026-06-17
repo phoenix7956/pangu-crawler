@@ -6,7 +6,7 @@
  *   PANGU_CRAWLER_MOCK=1 node dist/index.js   # W1 阶段（mock 抓取）
  *   node dist/index.js                        # W2 阶段（真实抓取，需要 Python 子进程）
  */
-import { PanguCrawlerServer } from './server';
+import { PanguCrawlerServer } from './server.js';
 
 async function main(): Promise<void> {
   const server = new PanguCrawlerServer();

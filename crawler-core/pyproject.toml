@@ -16,14 +16,17 @@ keywords = [
 ]
 
 dependencies = [
-    # W1 阶段只装 parser（W2 才用 curl_cffi/playwright，先 optional）
-    "readability-lxml>=0.8.1",
-    "html2text>=2024.2.26",
+    # W1 阶段核心 deps（mock 抓取 + 内容提取）
     "loguru>=0.7.2",
     "pydantic>=2.8.0",
 ]
 
 [project.optional-dependencies]
+# 内容提取（W1 阶段要跑 parser 测试）
+parser = [
+    "readability-lxml>=0.8.1",
+    "html2text>=2024.2.26",
+]
 # W2 阶段：实抓需要
 w2 = [
     "curl-cffi>=0.7.1",

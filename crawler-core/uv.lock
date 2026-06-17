@@ -544,10 +544,8 @@ name = "pangu-crawler"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "html2text" },
     { name = "loguru" },
     { name = "pydantic" },
-    { name = "readability-lxml" },
 ]
 
 [package.optional-dependencies]
@@ -555,6 +553,10 @@ dev = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
+]
+parser = [
+    { name = "html2text" },
+    { name = "readability-lxml" },
 ]
 w2 = [
     { name = "curl-cffi" },
@@ -565,17 +567,17 @@ w2 = [
 [package.metadata]
 requires-dist = [
     { name = "curl-cffi", marker = "extra == 'w2'", specifier = ">=0.7.1" },
-    { name = "html2text", specifier = ">=2024.2.26" },
+    { name = "html2text", marker = "extra == 'parser'", specifier = ">=2024.2.26" },
     { name = "loguru", specifier = ">=0.7.2" },
     { name = "playwright", marker = "extra == 'w2'", specifier = ">=1.47.0" },
     { name = "pydantic", specifier = ">=2.8.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.23" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },
-    { name = "readability-lxml", specifier = ">=0.8.1" },
+    { name = "readability-lxml", marker = "extra == 'parser'", specifier = ">=0.8.1" },
     { name = "tenacity", marker = "extra == 'w2'", specifier = ">=9.0.0" },
 ]
-provides-extras = ["w2", "dev"]
+provides-extras = ["parser", "w2", "dev"]
 
 [[package]]
 name = "playwright"

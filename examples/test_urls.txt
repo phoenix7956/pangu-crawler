@@ -1,12 +1,43 @@
-# 反爬 baseline 测试 URL（W2 用）
+# pangu-crawler test URLs (W2 验收 10 个公开站)
+#
+# 用途: docs/BASELINE.md 反爬 baseline 数据采集
+# 选择标准:
+#   - 无 JS 渲染 (HTML 静态页)
+#   - 无登录墙
+#   - 公开可访问
+#   - 覆盖不同语言 / 不同地域
+#   - 覆盖不同内容类型 (文档 / 新闻 / 博客 / 电商 / API doc)
 
-https://example.com
-https://httpbin.org/get
-https://httpbin.org/html
-https://www.iana.org/
-https://quotes.toscrape.com/
+# 1. example.com — IANA 官方示例, 永远 200
+https://example.com/
+
+# 2. example.org — 同上, 备份域
+https://example.org/
+
+# 3. example.net — 同上
+https://example.net/
+
+# 4. Wikipedia — 公开知识库, 内容稳定
+https://en.wikipedia.org/wiki/Web_scraping
+
+# 5. IETF — 标准文档
+https://www.ietf.org/rfc/rfc2616.txt
+
+# 6. Python.org — 编程语言官网
+https://www.python.org/
+
+# 7. GitHub — 开发者平台 (可能触发反爬)
+https://github.com/anthropics/anthropic-cookbook
+
+# 8. Hacker News — 科技新闻
 https://news.ycombinator.com/
-https://www.wikipedia.org/
-https://github.com/D4Vinci/Scrapling
-https://www.rust-lang.org/
-https://www.bing.com/
+
+# 9. crates.io — Rust 包管理 (JSON API 风格)
+https://crates.io/
+
+# 10. npmjs.com — Node 包管理 (可能反爬较强)
+https://www.npmjs.com/
+
+---
+# 抓取验证脚本: docs/BASELINE.md 引用
+# 跑法: pnpm test (mcp-server) + uv run python -m pangu_crawler.examples.test_runner

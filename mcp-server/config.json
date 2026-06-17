@@ -1,0 +1,19 @@
+{
+  "server": {
+    "name": "pangu-crawler",
+    "version": "0.1.0",
+    "description": "Pangu 自研爬虫能力 - MCP Server"
+  },
+  "crawler": {
+    "python_path": "python3",
+    "crawler_module": "pangu_crawler.cli",
+    "stdio_timeout_ms": 60000,
+    "default_timeout_ms": 30000,
+    "max_retries": 3,
+    "use_proxy": false
+  },
+  "logging": {
+    "level": "info",
+    "pretty": false
+  }
+}

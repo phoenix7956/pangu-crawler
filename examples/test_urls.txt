@@ -1,0 +1,12 @@
+# 反爬 baseline 测试 URL（W2 用）
+
+https://example.com
+https://httpbin.org/get
+https://httpbin.org/html
+https://www.iana.org/
+https://quotes.toscrape.com/
+https://news.ycombinator.com/
+https://www.wikipedia.org/
+https://github.com/D4Vinci/Scrapling
+https://www.rust-lang.org/
+https://www.bing.com/

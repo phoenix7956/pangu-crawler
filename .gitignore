@@ -1,0 +1,28 @@
+# Build outputs
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.venv/
+.uv-cache/
+*.egg-info/
+
+# Test outputs
+coverage/
+.coverage
+.nyc_output/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

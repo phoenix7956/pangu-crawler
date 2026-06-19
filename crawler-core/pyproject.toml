@@ -4,9 +4,9 @@ version = "0.1.0"
 description = "盘古自研爬虫能力 - Python crawler core"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { text = "Apache-2.0" }
 authors = [
-    { name = "Hermes Agent", email = "hermes@phoenix7956.local" },
+    { name = "Pangu-MCP Team", email = "team@pangu-mcp.org" },
 ]
 keywords = [
     "web-scraping",
